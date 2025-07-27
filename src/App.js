@@ -9,6 +9,7 @@ import RecordList from "./Pages/RecordList";
 import NewRecord from "./Pages/NewRecord";
 import {Provider} from "react-redux";
 import {store} from "./Redux/Store/Store";
+import ProtectedRoute from "./Pages/ProtectedRoute";
 function App() {
   return (
       <Provider store={store}>
@@ -19,7 +20,7 @@ function App() {
                   <Route path="/register" element={<Register/>}/>
                   <Route path="/studio" element={<Studio/>}/>
                   <Route path="/recordlist" element={<RecordList/>}/>
-                  <Route path="/newrecord" element={<NewRecord/>}/>
+                  <Route path="/newrecord" element={ <ProtectedRoute> <NewRecord/> </ProtectedRoute>}/>
               </Routes>
           </BrowserRouter>
       </Provider>
