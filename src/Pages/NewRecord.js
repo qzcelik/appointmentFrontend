@@ -6,7 +6,10 @@ import Preview from "./Preview";
 import {useDispatch, useSelector} from "react-redux";
 import {addCompany, addcompanyExplanantion, updatePersonel,addPersonel, addProducts,addProductProperties} from "../Redux/Slicer/RecordSlice";
 import { v4 as uuidv4 } from 'uuid';
+import {useAddPersonel} from "./AddPersonel";
+
 const NewRecord = () => {
+    
     const dispatch = useDispatch();
     
     const personelRecord = useSelector((state)=>state.record.personels);
@@ -24,6 +27,8 @@ const NewRecord = () => {
     const [productPropertieTime, setProductPropertieTime] = useState("");
     const [productPropertie, setProductPropertie] = useState("");
 
+    const addPersonelForDb = useAddPersonel(personel);
+    
     const handleAddCompany = () => {
         if (!companyName.trim()) return;
         dispatch(addCompany(companyName));
@@ -31,6 +36,7 @@ const NewRecord = () => {
 
     const handleAddPersonel = () => {
         if (!personel.trim()) return;
+        addPersonelForDb(personel);
         setPersonelPropertyInputs([...personelPropertyInputs, ""]);
         dispatch(addPersonel({
             name:personel,
@@ -59,7 +65,7 @@ const NewRecord = () => {
         setPersonelPropertyInputs(updatedInputs);
     };
 
-    const handleInputChange = (index, value) => {
+    const handlePersonelChange = (index, value) => {
         const updatedInputs = [...personelPropertyInputs];
         updatedInputs[index] = value;
         setPersonelPropertyInputs(updatedInputs);
@@ -103,9 +109,8 @@ const NewRecord = () => {
                 >
                 <Button
                     variant="contained"
-                    color="success"
-                
-                >Kaydet
+                    color="success">
+                    Kaydet
                 </Button>
             </Box>
             <Box display="flex" flexDirection="row">
@@ -170,7 +175,7 @@ const NewRecord = () => {
                                                 fullWidth
                                                 placeholder="Personel Özelliği"
                                                 value={personelPropertyInputs[index]}
-                                                onChange={(e) => handleInputChange(index, e.target.value)}
+                                                onChange={(e) => handlePersonelChange(index, e.target.value)}
                                             />
                                             <Button
                                                 sx={{ mt: 1 }}

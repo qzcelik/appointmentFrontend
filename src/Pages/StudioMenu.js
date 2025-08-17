@@ -12,7 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import {
     Feedback,
     PermMedia,
-    Menu, Add, FormatListBulleted,
+    Menu, Add, FormatListBulleted, Logout,
 } from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 
@@ -25,9 +25,12 @@ function StudioMenu({children}) {
     });
 
     const toggleDrawer = (anchor, open) => (event) => {
-       
-
         setState({ ...state, [anchor]: open });
+    };
+    
+    const logout = ()=>{
+        localStorage.removeItem("token");
+        nav("/login");
     };
 
     const iemsList = (anchor) => (
@@ -38,8 +41,7 @@ function StudioMenu({children}) {
                 backgroundColor: "#09212E",
                 height: '100%'
             }}
-            role="drawer"
-        >
+            role="drawer">
         
             <Divider />
             <List>
@@ -54,6 +56,12 @@ function StudioMenu({children}) {
                         {<FormatListBulleted />}
                     </ListItemIcon>
                     <ListItemText primary={"Randevu Listeleri"} />
+                </ListItemButton>
+                <ListItemButton sx={{ color: "white" }} onClick={()=>logout()}>
+                    <m sx={{ color: "white" }}>
+                        {<Logout sx={{marginRight:'30px'}}/>}
+                    </m>
+                    <ListItemText primary={"Çıkış Yap"} />
                 </ListItemButton>
             </List>
         </Box>

@@ -4,7 +4,6 @@ import {Route, BrowserRouter, Routes} from "react-router-dom";
 import Home from "./Pages/Home";
 import Login from "./Pages/login";
 import Register from "./Pages/register";
-import Studio from "./Pages/Studio";
 import RecordList from "./Pages/RecordList";
 import NewRecord from "./Pages/NewRecord";
 import {Provider} from "react-redux";
@@ -18,7 +17,6 @@ function App() {
                   <Route path="/" element={<Home/>}/>
                   <Route path="/login" element={<Login/>}/>
                   <Route path="/register" element={<Register/>}/>
-                  <Route path="/studio" element={<Studio/>}/>
                   <Route path="/recordlist" element={<RecordList/>}/>
                   <Route path="/newrecord" element={ <ProtectedRoute> <NewRecord/> </ProtectedRoute>}/>
               </Routes>
